@@ -1,9 +1,12 @@
 module.exports= {
-    HOST :"localhost",
+    HOST :"monorail.proxy.rlwy.net",
     USER : "root",
-    PASSWORD : "",
-    DB :"sushil", // change database name
+    PASSWORD : "vtcpieJBCKbZQxbCsfVTpSlTFgpJeZjH",
+    DB :"railway", // change database name
     diaect : "mysql",
+   
+
+
     pool:{
         max : 5, 
         min:0,
