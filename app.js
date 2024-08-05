@@ -1,13 +1,15 @@
 const express= require("express") // require and the calling which is store in the app  which is used throughout the project
 const { blogs } = require("./model/index")
+const {users} = require("./model/index")
 //blog data table 
+const bycrypt = require('bcrypt')
 const { where } = require("sequelize")
 const { renderCreateBlog, allBlogs, createMe, sBlog, login, Editor, updateMe, destroyBlog } = require("./controller/blogController")
 const app = express()
 //Routes Here 
 const blogRoute = require('./routes/blogRoute')
 // database connection 
-
+const authRoute = require('./routes/authRoute')
 require("./model/index")
 app.use(express.static("public/"))
 // setting ejs 
@@ -17,7 +19,7 @@ app.use(express.urlencoded({extended:true}))
 
 // app.get('/',allBlogs)
 app.use("",blogRoute) // middleware
- 
+app.use("",authRoute)
 // app.use("/hello",blogRoute) //localhost:3000/hello/blogRoute
 // app.get('/createblog',renderCreateBlog)
 // //create blogs b
@@ -26,11 +28,11 @@ app.use("",blogRoute) // middleware
 // specific id ko content magnu paro 
 // app.get('/single/:id', sBlog)
 
-app.get('/login',login)
-app.post('/updateMe/:id',updateMe)
+// app.get('/login',login)
+// app.post('/updateMe/:id',updateMe)
 
-app.get('/editBlog/:id',Editor)
-app.get('/deleteBlog/:id',destroyBlog)
+// app.get('/editBlog/:id',Editor)
+// app.get('/deleteBlog/:id',destroyBlog)
 
 
 

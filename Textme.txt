@@ -1,0 +1,7 @@
+mvc pattern 
+Nodejs => MVCR (model view controller and Route)
+view = Ejs file .../ other view engine too pug etc
+Router = routes/path/api 
+controller = it consist of the main logic like performing 
+crud 
+Model = table reated kura haru / schema / structure etc 

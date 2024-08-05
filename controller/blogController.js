@@ -55,9 +55,7 @@ exports.sBlog = async(req,res)=>{
     res.render("singleBlog.ejs",{sblog : blog})
 }
 
-exports.login = (req,res)=>{
-    app.render("login")
-    }
+
 
     exports.Editor  = async(req,res)=>{
         const id = req.params.id
@@ -109,3 +107,4 @@ exports.destroyBlog  = async(req,res)=>{
     })
     res.redirect('/');
 }
+
