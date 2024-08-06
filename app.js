@@ -45,3 +45,5 @@ app.use("",authRoute)
 app.listen(3000,()=>{
     console.log("Node js is started in 3000")
 })
+// to clear git cached we have to 
+// git  rm -r --cached file/foldername

@@ -1,3 +1,4 @@
 .env
-Textme.txt
 .git
+Textme.txt
+node_modules/
