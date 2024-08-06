@@ -1,5 +1,6 @@
 const { users } = require("../model");
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 exports.renderregister = (req,res)=>{
     res.render('register')
@@ -17,6 +18,9 @@ exports.registerp = async(req,res)=>{
     // const username = req.body.username;
     const {email ,password ,username ,confirmPassword} = req.body
     console.log(email,password,username,confirmPassword)
+    if(!password || !email ||!username){
+        return res.send("invalid input");
+    }
     if(password!==confirmPassword){
         console.log("wrong password")
        return res.send("password and confirm password doesn't matches")
@@ -67,6 +71,12 @@ exports.loginp =async(req,res)=>{
         let password1 = avail[0].password
         if(email===email1){
             if(bcrypt.compareSync(password,password1)){
+                //generate token 
+               const token= jwt.sign({id:avail[0].id},process.env.SECRETKEY,{expiresIn:"30d"})
+            //    res.cookie('token',token,{secure:true}, {expires :120}) 
+            res.cookie('token',token)
+                // console.log(process.env.SECRETKEY)
+                console.log("Token :"+ token)
                 res.redirect('/')
             }
             else{

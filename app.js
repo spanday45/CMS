@@ -2,6 +2,7 @@ const express= require("express") // require and the calling which is store in t
 const { blogs } = require("./model/index")
 const {users} = require("./model/index")
 //blog data table 
+require('dotenv').config()//requiring dotenv and installazing it with default configuration 
 const bycrypt = require('bcrypt')
 const { where } = require("sequelize")
 const { renderCreateBlog, allBlogs, createMe, sBlog, login, Editor, updateMe, destroyBlog } = require("./controller/blogController")

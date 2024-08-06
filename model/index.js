@@ -31,6 +31,13 @@ db.sequelize = sequelize;
 
 db.blogs = require("./blogModel.js")(sequelize, DataTypes);
 db.users = require("./userModel.js")(sequelize, DataTypes);
+// relationships 
+db.users.hasMany(db.blogs) //users can have many blogs
+db.blogs.belongsTo(db.users)// and blogs belong to the user 
+
+
+
+
 
 // db.reviews = require("./reviewModel.js")(sequelize, DataTypes);
 
