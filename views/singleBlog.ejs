@@ -76,7 +76,10 @@
            <button><a href="/deleteMe/<%-sblog[0].id%>">Delete</a> </button>
         </div>
         <footer>
-            <p><%-sblog[0].createdAt%></p>
+            <p>Author : <%-sblog[0].User.username%></p>
+            <p>Email : <%-sblog[0].User.email%></p>
+            <p>Created at :<%-sblog[0].createdAt%></p>
+            <!-- <p>Author : <%-sblog[0]%></p> -->
             <!-- alternative -->
             <!-- <p><%-sblog[0].createdAt.toISOString().slice(10)%></p> -->
             <!-- we can slice it  -->

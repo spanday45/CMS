@@ -1,18 +1,19 @@
-const { renderCreateBlog, createMe, sBlog, updateMe, Editor, destroyBlog, allBlogs, login } = require('../controller/blogController');
+const { renderCreateBlog, createMe, sBlog, updateMe, Editor, destroyBlog, allBlogs, login, rendermyblogs } = require('../controller/blogController');
+const { isAutheticated } = require('../middleware/isAuthenticate');
 
 const router = require('express').Router()
 //for routing 
 // router.route('/').get('allBlogs')
 //restful api 
 router.route("/").get(allBlogs)
-router.route('/createblog').get(renderCreateBlog).post(createMe)
+router.route('/createblog').get(renderCreateBlog).post(isAutheticated,createMe)
 router.route('/single/:id').get(sBlog)
 
-router.route('/updateMe/:id').post(updateMe)
-router.route('/editMe/:id').get(Editor)
-router.route('/deleteMe/:id').get(destroyBlog)
+router.route('/updateMe/:id').post(isAutheticated,updateMe)
+router.route('/editMe/:id').get(isAutheticated,Editor)
+router.route('/deleteMe/:id').get(isAutheticated,destroyBlog)
 // if we have a two same verbs we can use in the same line two verbs 
 // we can make it restful api to by 
 // router.route("/:id").get( Blog).post(updateMe) -> not recommended
-
+router.route('/myblogs').get(isAutheticated,rendermyblogs)
 module.exports =router;

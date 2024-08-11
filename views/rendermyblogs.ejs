@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards Page</title>
+    <link rel="stylesheet" href="/css/blogs.css">
+
+</head>
+<body>
+    
+    
+    <%- include("navbar1")%>
+    <p style="font-size: xx-large; text-align: center;text-decoration: underline; ">My Blogs</p>
+<div class="container">
+    <% if (myblogs.length>0 ){%>
+   <%  myblogs.forEach((blog)=>{ %>
+   <div class="card">
+
+        
+        <h2><%-blog.title %></h2>
+
+        <h3><%-blog.subTitle%></h3>
+        <p><%-blog.description%></p>
+   
+        <p> <a href="/single/<%-blog.id%>">Read More</a></p>
+    </div>
+<% }) %>
+<% }else {%>
+
+    <h1>No blogs</h1>
+    <% }%>
+
+</div>
+
+
+<p style="text-align: center;">&copy; 2024 our blog</p>
+    
+</body>
+</html>

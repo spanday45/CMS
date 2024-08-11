@@ -1,4 +1,4 @@
-const { blogs } = require("../model");
+const { blogs, users } = require("../model");
 // control+ space import something  
 
 exports.renderCreateBlog = (req,res)=>{
@@ -11,17 +11,20 @@ exports.renderCreateBlog = (req,res)=>{
 }
 exports.createMe =  async(req,res)=>{
     // first approach
+    
+    
     const title = req.body.title;
     const subTitle =req.body.subtitle;
     const description = req.body.description;
-    console.log(req.body)
+    // console.log(req.body)
     // second approach
     // const{title , subTitle, description}= req.body 
     
     await blogs.create({
         title :req.body.title,
         subTitle :subTitle,
-        description:description
+        description:description,
+        UserId: req.user[0].id
     })
     // console.log(req.body)
     //in post when the data is send it will located in the
@@ -32,7 +35,19 @@ exports.createMe =  async(req,res)=>{
 
 }
 exports.allBlogs =async(req,res)=>{
-    const allBlogs=  await blogs.findAll()
+    const allBlogs=  await blogs.findAll(
+        {
+            include:
+            {
+
+                model :users
+                // this is join in the database with sequelize
+
+            }
+            
+
+        }
+    )
     console.log(allBlogs)
     
     //allBlogs is array vitra object
@@ -46,6 +61,9 @@ exports.sBlog = async(req,res)=>{
   const blog = await blogs.findAll( {
         where:{
             id:id
+        },
+        include: {
+        model : users,
         }
     })
     // second approach
@@ -108,3 +126,14 @@ exports.destroyBlog  = async(req,res)=>{
     res.redirect('/');
 }
 
+exports.rendermyblogs = async(req,res)=>{
+    const userid = req.userId
+    console.log(userid)
+    const  mypersonalblog =await blogs.findAll({
+        where:{
+             UserId : userid
+            }
+     })
+     console.log(mypersonalblog)
+     res.render("rendermyblogs" ,{myblogs:mypersonalblog})
+    }

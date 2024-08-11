@@ -1,6 +1,7 @@
 const express= require("express") // require and the calling which is store in the app  which is used throughout the project
 const { blogs } = require("./model/index")
 const {users} = require("./model/index")
+const cookieParser = require('cookie-parser')
 //blog data table 
 require('dotenv').config()//requiring dotenv and installazing it with default configuration 
 const bycrypt = require('bcrypt')
@@ -17,7 +18,7 @@ app.use(express.static("public/"))
 app.set("view engine","ejs")
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-
+app.use(cookieParser())
 // app.get('/',allBlogs)
 app.use("",blogRoute) // middleware
 app.use("",authRoute)
