@@ -6,6 +6,7 @@
     <title>Your Blog Title Here</title>
     <style>
         body {
+          
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -17,10 +18,11 @@
         }
      
         .container {
+           
             width: 80%;
             max-width: 800px;
             background: white;
-            padding: 20px;
+            padding: 50px  20px 20px 20px;
             margin: 20px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
@@ -28,13 +30,7 @@
             text-align: center;
             margin-bottom: 20px;
         }
-        .header img {
-            width: 100%;
-            height: auto;
-            max-height: 400px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
+      
         .header h1 {
             margin: 20px 0 10px;
             font-size: 2.5em;
@@ -66,7 +62,7 @@
 
     <div class="container">
         <div class="header">
-            
+            <img src="<%-sblog[0].image%>" height="200px" width="200px">
             <h1><%- sblog[0].title%></h1>  <!--it is in the array so index 0-->
             <h2> <%- sblog[0].subTitle%></h2>
         </div>
@@ -76,6 +72,7 @@
            <button><a href="/deleteMe/<%-sblog[0].id%>">Delete</a> </button>
         </div>
         <footer>
+            
             <p>Author : <%-sblog[0].User.username%></p>
             <p>Email : <%-sblog[0].User.email%></p>
             <p>Created at :<%-sblog[0].createdAt%></p>

@@ -8,7 +8,7 @@ console.log(req.cookies.token)
 const token =req.cookies.token
 // if token is not sent 
 if(!token){
-    return res.send("First login in order to add blogs");
+    return res.redirect('/login')
 }
 // if send then we have to verify the jwt 
 // by verify method 

@@ -10,14 +10,14 @@
 <body>
     
     
-    <%- include("navbar1")%>
+    <%- include("navbar")%>
     <p style="font-size: xx-large; text-align: center;text-decoration: underline; ">My Blogs</p>
 <div class="container">
     <% if (myblogs.length>0 ){%>
    <%  myblogs.forEach((blog)=>{ %>
    <div class="card">
 
-        
+    <img src="<%-blog.image%>" width="100px" height="100px">
         <h2><%-blog.title %></h2>
 
         <h3><%-blog.subTitle%></h3>

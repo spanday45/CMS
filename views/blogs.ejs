@@ -17,6 +17,7 @@
 
     <% blogs.length>0 && blogs.forEach((blog)=>{ %>
         <div class="card">
+            <img src="<%-blog.image%>"  height="100px" width="100px" >
             <h2><%- blog.title%></h2>
             <!-- <h2><%= blog.title%></h2> -->
             <h3><%-blog.subTitle%></h3>

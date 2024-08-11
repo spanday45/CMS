@@ -5,9 +5,13 @@ const router = require('express').Router()
 //for routing 
 // router.route('/').get('allBlogs')
 //restful api 
+const {multer ,storage} = require("../middleware/multerConfig");
+const upload = multer({storage:storage});
+
+
 router.route("/").get(allBlogs)
-router.route('/createblog').get(renderCreateBlog).post(isAutheticated,createMe)
-router.route('/single/:id').get(sBlog)
+router.route('/createblog').get(isAutheticated,renderCreateBlog).post(isAutheticated,upload.single('image'),createMe)
+router.route('/single/:id').get(isAutheticated,sBlog)
 
 router.route('/updateMe/:id').post(isAutheticated,updateMe)
 router.route('/editMe/:id').get(isAutheticated,Editor)

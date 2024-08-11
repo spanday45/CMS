@@ -11,20 +11,27 @@ exports.renderCreateBlog = (req,res)=>{
 }
 exports.createMe =  async(req,res)=>{
     // first approach
-    
-    
+    // console.log(req.file.filename)
+    const filename = req.file.filename
     const title = req.body.title;
     const subTitle =req.body.subtitle;
     const description = req.body.description;
+
+    // file doesn't comes with the body 
+    // const image = req.body.image will extract the name of the image only 
     // console.log(req.body)
     // second approach
     // const{title , subTitle, description}= req.body 
-    
+    if  (!title || !subTitle || !description || !req.file){
+        return res.send("fill all the input field ")
+    }
     await blogs.create({
         title :req.body.title,
         subTitle :subTitle,
         description:description,
-        UserId: req.user[0].id
+        UserId: req.user[0].id,
+        image :process.env.PROJECT_URL+filename
+       
     })
     // console.log(req.body)
     //in post when the data is send it will located in the
@@ -41,6 +48,7 @@ exports.allBlogs =async(req,res)=>{
             {
 
                 model :users
+                //users is the name of the table from the model of index .js
                 // this is join in the database with sequelize
 
             }

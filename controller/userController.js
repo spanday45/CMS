@@ -85,3 +85,7 @@ exports.loginp =async(req,res)=>{
         }
     }
 }
+exports.logOut =(req,res)=>{
+    res.clearCookie('token') // name of the token
+    res.redirect('/login')
+}

@@ -19,6 +19,12 @@ app.set("view engine","ejs")
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
+app.use((req,res,next)=>{
+// res.locals.name ="sushil" // it will be global name is a variable name it can be accessed from everywhere
+res.locals.currentUser = req.cookies.token
+next()
+})
+// it tiger eveytime
 // app.get('/',allBlogs)
 app.use("",blogRoute) // middleware
 app.use("",authRoute)
@@ -38,6 +44,7 @@ app.use("",authRoute)
 
 
 
+app.use(express.static('uploads/'))
 
 
 
