@@ -1,6 +1,7 @@
 const { users } = require("../model");
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const sendEmail = require("../services/sendEmail");
 
 exports.renderregister = (req,res)=>{
     res.render('register')
@@ -89,3 +90,55 @@ exports.logOut =(req,res)=>{
     res.clearCookie('token') // name of the token
     res.redirect('/login')
 }
+exports.renderForgetPassword = (req,res)=>{
+   res.render("forgetpassword")
+}
+exports.SendOTP = async (req,res)=>{
+    
+    const email = req.body.email
+    //aako email 
+    if(!email){
+        return res.send("Please provide the email");
+    }
+   
+       const emailfind = await users.findAll({
+            where :{
+                email : email
+            }
+        })
+
+
+    if (emailfind.length==0){
+        return res.send("sorry your email is not register")
+    }
+    // const emailExists = emailfind[0].email
+    // lets send the otp to the already register user 
+    else{
+   
+     
+
+         await  sendEmail({
+             email:email, // aako email ma it will call function sendEmail service /
+             subject : "forget password",
+             otp : 2342 
+            })
+        }
+        res.send("email sent sucessfully");
+    }
+    /*
+    in order to send it all to the email user 
+    we have to store the emails in the array of any 
+    kind of the data structure and we have to apply loop on it 
+    let suppose 
+    let userAccount = [ ..... ]
+    for(let i =0;i<userAccount.length;i++){
+     await  sendEmail({
+            email:userAccount[i].email, // aako email ma it will call function sendEmail service /
+            subject : "forget password ", // it can be change to notification and all 
+            otp : 23433
+        })
+        res.send("email sent sucessfully");
+    }
+    
+    
+*/

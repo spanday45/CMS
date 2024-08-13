@@ -1,4 +1,5 @@
 const { blogs, users } = require("../model");
+const  fs = require('fs') // filesystem
 // control+ space import something  
 
 exports.renderCreateBlog = (req,res)=>{
@@ -99,7 +100,10 @@ exports.sBlog = async(req,res)=>{
     }
 
    
+
     exports.updateMe = async(req,res)=>{
+        
+        console.log(req.file)
         const id = req.params.id
         const obj = await blogs.findAll(
             {
@@ -110,18 +114,42 @@ exports.sBlog = async(req,res)=>{
                 }
             }
         )
+     
         const title = req.body.title;
         const subTitle = req.body.subTitle;
         const description = req.body.description;
+        console.log(obj)
+        const oldData = obj[0].image
+        console.log(oldData)
+        let  filename ; 
+        if (req.file){
+            filename = process.env.PROJECT_URL+req.file.filename
+            console.log(oldData)
+        let olddata = oldData.slice(22)
+        console.log(olddata)
+        fs.unlink('uploads/'+olddata,(err)=>{
+            if(err){
+                console.log("error happed ",err)
+            }
+            else{
+                console.log("deleted sucessfully")
+            }
+        })
+        }
+        else{
+            filename = oldData
+        }
         await blogs.update({
             title :title,
             subTitle: subTitle,
-            description:description
+            description:description,
+            image :filename
         } 
           ,{
             where:{ id:id}
-          } 
+          }  
         )
+      
         res.redirect('/')
     }
 exports.destroyBlog  = async(req,res)=>{
